@@ -15,6 +15,29 @@ _io = [
 
     ("cpu_reset", 0, Pins("U4"), IOStandard("SSTL15")),
 
+    ("user_btn_c", 0, Pins("U6"),  IOStandard("SSTL15")),
+    ("user_btn_n", 0, Pins("P6"), IOStandard("SSTL15")),
+    ("user_btn_s", 0, Pins("T5"), IOStandard("SSTL15")),
+    ("user_btn_w", 0, Pins("R5"),  IOStandard("SSTL15")),
+    ("user_btn_e", 0, Pins("U5"),  IOStandard("SSTL15")),
+
+    ("user_dip_btn", 0, Pins("R8"),  IOStandard("SSTL15")),
+    ("user_dip_btn", 1, Pins("P8"),  IOStandard("SSTL15")),
+    ("user_dip_btn", 2, Pins("R7"), IOStandard("SSTL15")),
+    ("user_dip_btn", 3, Pins("R6"),  IOStandard("SSTL15")),
+
+    ("user_sma_clock", 0,
+        Subsignal("p", Pins("J23"), IOStandard("LVCMOS25"),
+            Misc("DIFF_TERM=TRUE")),
+        Subsignal("n", Pins("H23"), IOStandard("LVCMOS25"),
+            Misc("DIFF_TERM=TRUE"))
+    ),
+    ("user_sma_clock_p", 0, Pins("J23"), IOStandard("LVCMOS25")),
+    ("user_sma_clock_n", 0, Pins("H23"), IOStandard("LVCMOS25")),
+
+    ("user_sma_gpio_p", 0, Pins("T8"), IOStandard("SSTL15")),
+    ("user_sma_gpio_n", 0, Pins("T7"), IOStandard("SSTL15")),
+
     ("clk200", 0,
         Subsignal("p", Pins("R3"), IOStandard("DIFF_SSTL15")),
         Subsignal("n", Pins("P3"), IOStandard("DIFF_SSTL15"))
@@ -25,6 +48,13 @@ _io = [
         Subsignal("n", Pins("M22"), IOStandard("LVDS_25"))
     ),
 
+    ("i2c", 0,
+        Subsignal("scl", Pins("N18")),
+        Subsignal("sda", Pins("K25")),
+        IOStandard("LVCMOS33")),
+
+    ("i2c_mux_resetb", 0, Pins("R17"), IOStandard("LVCMOS33")),
+
     ("serial", 0,
         Subsignal("cts", Pins("V19")),
         Subsignal("rts", Pins("W19")),
@@ -32,6 +62,42 @@ _io = [
         Subsignal("rx",  Pins("T19")),
         IOStandard("LVCMOS18")
     ),
+
+    ("spiflash", 0,  # clock needs to be accessed through STARTUPE2
+        Subsignal("cs_n", Pins("P18")),
+        Subsignal("dq",   Pins("R14 R15 P14 N14")),
+        IOStandard("LVCMOS33")
+    ),
+
+    ("sdcard", 0,
+        Subsignal("clk", Pins("N24")),
+        Subsignal("cmd", Pins("N23"), Misc("PULLUP True")),
+        Subsignal("data", Pins("P19 N19 P23 P21"), Misc("PULLUP True")),
+        Misc("SLEW=FAST"),
+        IOStandard("LVCMOS33")
+    ),
+
+    ("spisdcard", 0,
+        Subsignal("clk",  Pins("N24")),
+        Subsignal("cs_n", Pins("P21")),
+        Subsignal("mosi", Pins("N23"), Misc("PULLUP")),
+        Subsignal("miso", Pins("P19"), Misc("PULLUP")),
+        Misc("SLEW=FAST"),
+        IOStandard("LVCMOS33")
+    ),
+
+    ("lcd", 0,
+        Subsignal("db", Pins("L25 M24 M25 L22")),
+        Subsignal("e",  Pins("L20")),
+        Subsignal("rs", Pins("L23")),
+        Subsignal("rw", Pins("L24")),
+        IOStandard("LVCMOS33")),
+
+    ("rotary", 0,
+        Subsignal("a", Pins("N22")),
+        Subsignal("b", Pins("P20")),
+        Subsignal("push", Pins("N21")),
+        IOStandard("LVCMOS33")),
 
     ("eth_clocks", 0,
         Subsignal("tx", Pins("U22")),
@@ -114,11 +180,16 @@ _io = [
     ("sfp_mgt_clk_sel1", 0, Pins("C24"), IOStandard("LVCMOS25")),
     ("sfp_tx_disable_n", 0, Pins("R18"), IOStandard("LVCMOS33")),
     ("sfp_rx_los",       0, Pins("R23"), IOStandard("LVCMOS33")),
+
+    ("fmc1_hpc_pg_m2c", 0, Pins("N17"), IOStandard("LVCMOS25")),
+    ("fmc1_hpc_prsnt_m2c_b", 0, Pins("N16"), IOStandard("LVCMOS25")),
+    ("fmc1_vadj_on_b", 0, Pins("R16"), IOStandard("LVCMOS25")),
 ]
 
 # Connectors ---------------------------------------------------------------------------------------
 
 _connectors = [
+    ("pmoda", "P26 T22 R22 T23"),
     ("HPC", {
       "CLK0_M2C_N" : "C19",
       "CLK0_M2C_P" : "D19",
