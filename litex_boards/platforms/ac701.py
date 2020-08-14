@@ -88,7 +88,7 @@ _io = [
     ),
 
     ("pcie_x1", 0,
-        Subsignal("rst_n", Pins("M20"), IOStandard("LVCMOS25")),
+        Subsignal("rst_n", Pins("M20"), IOStandard("LVCMOS33")),
         Subsignal("clk_p", Pins("F11")),
         Subsignal("clk_n", Pins("E11")),
         Subsignal("rx_p",  Pins("D12")),
